@@ -42,6 +42,7 @@ RUN apt-get update -y \
 
 RUN pipx ensurepath \
       && pipx install poetry \
+      && source ~/.bashrc \
       && poetry config virtualenvs.in-project true \
       && poetry config virtualenvs.prefer-active-python true
 
