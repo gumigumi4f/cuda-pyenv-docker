@@ -1,2 +1,2 @@
-# cuda-pyenv-docker
-Docker image containing cuda and pyenv
+# dev-toolbox-docker
+Docker image containing my dev toolkit
