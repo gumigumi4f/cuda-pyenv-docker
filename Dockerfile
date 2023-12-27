@@ -38,10 +38,10 @@ RUN apt-get update -y \
       && apt-get update -y \
       && apt-get install -y google-cloud-cli google-cloud-cli-gke-gcloud-auth-plugin \
       && apt-get clean \
-      && rm -rf /var/lib/apt/lists/* \
-      && bash -c "pipx ensurepath"
+      && rm -rf /var/lib/apt/lists/*
 
-RUN pipx install poetry \
+RUN echo 'export PATH="$PATH:/root/.local/bin"' >> ~/.bashrc \
+      && pipx install poetry \
       && ~/.local/bin/poetry config virtualenvs.in-project true \
       && ~/.local/bin/poetry config virtualenvs.prefer-active-python true
 
