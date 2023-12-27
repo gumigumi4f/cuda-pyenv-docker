@@ -42,9 +42,8 @@ RUN apt-get update -y \
 
 RUN pipx ensurepath \
       && pipx install poetry \
-      && source ~/.bashrc \
-      && poetry config virtualenvs.in-project true \
-      && poetry config virtualenvs.prefer-active-python true
+      && ~/.local/bin/poetry config virtualenvs.in-project true \
+      && ~/.local/bin/poetry config virtualenvs.prefer-active-python true
 
 RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv \
       && cd ~/.pyenv && src/configure && make -C src && cd ~/ \
