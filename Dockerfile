@@ -33,12 +33,21 @@ RUN apt-get update -y \
                             ca-certificates \
                             gnupg \
                             pipx \
+                            locales \
+                            language-pack-ja-base \
+                            language-pack-ja \
       && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg \
       && echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
       && apt-get update -y \
       && apt-get install -y google-cloud-cli google-cloud-cli-gke-gcloud-auth-plugin \
       && apt-get clean \
       && rm -rf /var/lib/apt/lists/*
+
+RUN locale-gen ja_JP.UTF-8
+
+ENV LANG ja_JP.UTF-8
+ENV LANGUAGE ja_JP:ja
+ENV LC_ALL ja_JP.UTF-8
 
 RUN echo 'export PATH="$PATH:/root/.local/bin"' >> ~/.bashrc \
       && pipx install poetry \
