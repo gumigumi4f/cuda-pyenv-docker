@@ -12,7 +12,6 @@ RUN apt-get update -y \
                             git \
                             tmux \
                             htop \
-                            jq \
                             gcc \
                             make \
                             build-essential \
@@ -34,8 +33,6 @@ RUN apt-get update -y \
                             gnupg \
                             pipx \
                             locales \
-                            language-pack-ja-base \
-                            language-pack-ja \
                             openssh-server \
       && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg \
       && echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
@@ -44,9 +41,6 @@ RUN apt-get update -y \
       && apt-get clean \
       && rm -rf /var/lib/apt/lists/*
 
-RUN locale-gen ja_JP.UTF-8 \
-      && locale-gen en_US.UTF-8
-
 ENV NOTVISIBLE "in users profile"
 
 RUN mkdir /var/run/sshd \
@@ -54,6 +48,8 @@ RUN mkdir /var/run/sshd \
       && sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
       && sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd \
       && echo "export VISIBLE=now" >> /etc/profile
+
+RUN locale-gen en_US.UTF-8
 
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
