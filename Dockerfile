@@ -60,8 +60,7 @@ ENV LC_ALL en_US.UTF-8
 
 RUN echo 'export PATH="$PATH:/root/.local/bin"' >> ~/.bashrc \
       && pipx install poetry \
-      && ~/.local/bin/poetry config virtualenvs.in-project true \
-      && ~/.local/bin/poetry config virtualenvs.prefer-active-python true
+      && ~/.local/bin/poetry config virtualenvs.in-project true
 
 RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv \
       && cd ~/.pyenv && src/configure && make -C src && cd ~/ \
